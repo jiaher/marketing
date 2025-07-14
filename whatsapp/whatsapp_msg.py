@@ -32,7 +32,7 @@ def read_client_data(file_path):
                             'portfolioValue0', 
                             'snapshotDate0', 
                             'delta', 
-                            'snapshotDate-2']
+                            'snapshotDate-1']
         missing_columns = [col for col in required_columns if col not in df.columns]
         
         if missing_columns:
@@ -50,7 +50,8 @@ def format_phone_number(phone):
     """
     # Remove any non-numeric characters
     
-    phone = ''.join(filter(str.isdigit, str(phone)))
+    # phone = ''.join(filter(str.isdigit, str(phone))) // uncomment if all numbers are +65 Singapore numbers
+    phone = str(phone)
     
     # Add country code if not present
     if not phone.startswith('+'):
@@ -89,7 +90,7 @@ def construct_whatsapp_messages(df):
         try:
             
             status = row['clientAccountStatus']
-            
+            print(status)
             # Do not send messages to inactive accounts i.e. status = 0 or negative
             if status > 0:
                 #key = row['clientIdentityNumber']
@@ -100,9 +101,9 @@ def construct_whatsapp_messages(df):
                 currency=row['clientInvestmentCurrency']
                 investment_amount=row['clientInvestment']
                 account_value=row['portfolioValue0']
-                last_account_value=row['portfolioValue-2']
+                last_account_value=row['portfolioValue-1']
                 snapshot_date=row['snapshotDate0'].strftime('%d %b %Y')
-                last_snapshot_date=row['snapshotDate-2'].strftime('%d %b %Y')
+                last_snapshot_date=row['snapshotDate-1'].strftime('%d %b %Y')
                 
                 # Calculate profit/loss
                 profit_loss = account_value - last_account_value
@@ -129,6 +130,7 @@ def construct_whatsapp_messages(df):
                     profit_loss_percentage=profit_loss_percentage,
                     last_snapshot_date=last_snapshot_date,
                     emoji=performance_emoji
+                    
                 )
                 
                 messages_arr = messages_dict[key]['body']
@@ -152,6 +154,7 @@ def send_whatsapp_messages(messages_dict, delay_minutes=2):
     
     for key, message_parts in messages_dict.items():
         
+        
         # Format phone number
         phone_number = format_phone_number(key)
                 
@@ -168,8 +171,8 @@ def main():
     Main function to execute the client messaging system.
     """
     # File path to your Excel file
-    excel_file = "test.xlsx"
-    #excel_file = "data.xlsx"
+    #excel_file = "test.xlsx"
+    excel_file = "data-jul-2025.xlsx"
     
     # Read client data
     client_data = read_client_data(excel_file)

@@ -1,8 +1,8 @@
 # msg_template.py
 
-TXT_GREETING = "happy new year to u!\n"
-TXT_OPENING = "Having concluded 2H 2024, here is a quick update on your investments with me:\n"
-TXT_FOOTER = "\n\nRefer to my commentary for a recap of 2H 2024 here: https://bit.ly/prestigeraffles2H2024\n\nFeel free to reach out for a quick update and explore any top-up.\n\nLastly, appreciate if u will pass my name on to benefit people around u with my expertise."
+TXT_GREETING = "Good day to u!\n"
+TXT_OPENING = "Having concluded 1H 2025, here is a quick update on your investments with me:\n"
+TXT_FOOTER = "\n\nRefer to my commentary for a recap of 1H 2025 here: https://tinyurl.com/prestigeraffles1H2025\n\nFeel free to reach out for a quick update and explore any top-up.\n\nLastly, appreciate if u will pass my name on to benefit people around u with my expertise."
 TXT_SIGNATURE = "\n\nChung Tze,\nManulife Financial Advisers"
 
 
